@@ -1,0 +1,39 @@
+/*
+ * Design tokens. Components never use raw colors; they use the semantic Tailwind
+ * utilities generated from these variables (bg-surface, text-muted, border-border, ...).
+ * Theme switching only swaps variable values, so no component needs dark: variants.
+ */
+:root,
+[data-theme='light'] {
+  --color-bg: oklch(98.5% 0.002 247);
+  --color-surface: oklch(100% 0 0);
+  --color-surface-muted: oklch(96.7% 0.003 265);
+  --color-fg: oklch(21% 0.034 265);
+  --color-fg-muted: oklch(44.6% 0.03 257);
+  --color-border: oklch(92.8% 0.006 265);
+  --color-primary: oklch(51.1% 0.262 277);
+  --color-primary-hover: oklch(45.7% 0.24 277);
+  --color-primary-fg: oklch(100% 0 0);
+  --color-danger: oklch(50.5% 0.213 27.5);
+  --color-danger-surface: oklch(97.1% 0.013 17.4);
+  --color-success: oklch(52.7% 0.154 150);
+  --color-focus: oklch(58.5% 0.233 277);
+  color-scheme: light;
+}
+
+[data-theme='dark'] {
+  --color-bg: oklch(14.5% 0.012 265);
+  --color-surface: oklch(19% 0.016 265);
+  --color-surface-muted: oklch(24% 0.018 265);
+  --color-fg: oklch(96.7% 0.003 265);
+  --color-fg-muted: oklch(70.7% 0.022 261);
+  --color-border: oklch(30% 0.02 265);
+  --color-primary: oklch(67.3% 0.182 277);
+  --color-primary-hover: oklch(74% 0.15 277);
+  --color-primary-fg: oklch(14.5% 0.012 265);
+  --color-danger: oklch(70.4% 0.191 22.2);
+  --color-danger-surface: oklch(25.8% 0.092 26);
+  --color-success: oklch(76.5% 0.177 163);
+  --color-focus: oklch(67.3% 0.182 277);
+  color-scheme: dark;
+}

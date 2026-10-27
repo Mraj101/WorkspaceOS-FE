@@ -1,36 +1,43 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Workspace
 
-## Getting Started
+Production-ready React frontend foundation: **React 19 · TypeScript (strict) · Vite · React Router · Redux Toolkit / RTK Query · Zustand · Tailwind CSS v4 · React Hook Form + Zod · Vitest + Testing Library + MSW**.
 
-First, run the development server:
+## Getting started
+
+Requires Node ≥ 22.22 and pnpm (version pinned in `package.json#packageManager`).
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+pnpm install
+cp .env.example .env.local   # mocks are enabled by default
+pnpm dev                     # http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+With mocks enabled, sign in with **demo@example.com / password123**. To use a real backend, set `VITE_ENABLE_MOCKS=false` and either point `VITE_API_BASE_URL` at it or set `API_PROXY_TARGET` to proxy `/api` through the dev server.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## Scripts
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Script               | Purpose                                               |
+| -------------------- | ----------------------------------------------------- |
+| `pnpm dev`           | Dev server with HMR (and MSW mocks if enabled)        |
+| `pnpm build`         | Type-check, then build to `dist/`                     |
+| `pnpm preview`       | Serve the production build locally                    |
+| `pnpm typecheck`     | `tsc -b` across app and tooling configs               |
+| `pnpm lint`          | ESLint, including a11y rules and architecture imports |
+| `pnpm format`        | Prettier (with Tailwind class sorting)                |
+| `pnpm test`          | Vitest in watch mode                                  |
+| `pnpm test:coverage` | Single run with V8 coverage                           |
+| `pnpm check`         | Everything CI should run: types, lint, format, tests  |
 
-## Learn More
+## Environment
 
-To learn more about Next.js, take a look at the following resources:
+All configuration is validated at startup in [`src/shared/config/env.ts`](src/shared/config/env.ts). Only `VITE_*` variables reach the browser bundle, so never put secrets in them.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+| Variable            | Default | Description                                         |
+| ------------------- | ------- | --------------------------------------------------- |
+| `VITE_API_BASE_URL` | `/api`  | Base URL of the main backend                        |
+| `VITE_ENABLE_MOCKS` | `false` | Serve API responses from MSW (dev server only)      |
+| `API_PROXY_TARGET`  | –       | Dev-only: proxy `/api` to this origin (not bundled) |
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Architecture
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+See **[docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)** for the directory layout, dependency rules, state ownership, RTK Query conventions, and the checklist for adding a new module.
